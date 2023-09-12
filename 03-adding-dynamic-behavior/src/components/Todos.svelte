@@ -1,15 +1,8 @@
 <!-- State of component represented by these 3 top-level variables -->
 <script>
-  let todos = [
-    { id: 1, name: "Create a Svelte starter app", completed: true },
-    { id: 2, name: "Create your first component", completed: true },
-    { id: 3, name: "Complete the rest of the tutorial", completed: false },
-    {
-      id: 4,
-      name: "Apply what you learned in a new project",
-      completed: false,
-    },
-  ];
+  // svelte uses 'export' keyword to mark a variable declaration as a property or prop,
+  // which means it is accessible to consumers of the component.
+  export let todos = [];
   let totalTodos = todos.length;
   let completedTodos = todos.filter((todo) => todo.completed).length;
 </script>
