@@ -8,19 +8,34 @@
   $: totalTodos = todos.length;
   $: completedTodos = todos.filter((todo) => todo.completed).length;
 
+  let newTodoName = "";
+
+  function addTodo() {
+    todos = [...todos, { id: 999, name: newTodoName, completed: false }];
+    newTodoName = "";
+  }
+
   function removeTodo(todo) {
     todos = todos.filter((t) => t.id !== todo.id);
   }
+  // $: console.log("newTodoName: ", newTodoName);
 </script>
 
 <!-- Todos.svelte -->
 <div class="todoapp stack-large">
   <!-- NewTodo -->
-  <form>
+  <form on:submit|preventDefault={addTodo}>
     <h2 class="label-wrapper">
       <label for="todo-0" class="label__lg"> What needs to be done? </label>
     </h2>
-    <input type="text" id="todo-0" autocomplete="off" class="input input__lg" />
+    <input
+      bind:value={newTodoName}
+      type="text"
+      id="todo-0"
+      autocomplete="off"
+      class="input input__lg"
+    />
+
     <button type="submit" disabled="" class="btn btn__primary btn__lg">
       Add
     </button>
