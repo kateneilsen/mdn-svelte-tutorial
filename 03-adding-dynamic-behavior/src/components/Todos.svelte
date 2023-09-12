@@ -3,8 +3,10 @@
   // svelte uses 'export' keyword to mark a variable declaration as a property or prop,
   // which means it is accessible to consumers of the component.
   export let todos = [];
-  let totalTodos = todos.length;
-  let completedTodos = todos.filter((todo) => todo.completed).length;
+  // '$:' is used to tell Svelte that these variables to be reactive.. which means
+  //rerun this code whenever any of the referenced values change
+  $: totalTodos = todos.length;
+  $: completedTodos = todos.filter((todo) => todo.completed).length;
 
   function removeTodo(todo) {
     todos = todos.filter((t) => t.id !== todo.id);
@@ -58,7 +60,7 @@
             <input
               type="checkbox"
               id="todo-{todo.id}"
-              on:click={() => (todo.completed = !todo.complete)}
+              on:click={() => (todo.completed = !todo.completed)}
               checked={todo.completed}
             />
             <label for="todo-{todo.id}" class="todo-label"> {todo.name} </label>
